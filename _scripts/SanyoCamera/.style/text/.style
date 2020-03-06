@@ -1,0 +1,5 @@
+border=4, 4, 4, 4
+padding=3, 3, 3, 3
+margin=3, 3, 3, 3
+clipping=clip
+normal.textColor=0.9, 0.9, 0.9
