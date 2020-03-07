@@ -29,11 +29,7 @@ namespace SanyoCamera
       this.camera = new CameraManager(config);
       this.light = new LightManager();
       this.Gui = this.gameObject.AddComponent<SettingGUI>();
-      this.Gui.camera = camera;
-      this.Gui.light = light;
-      this.Gui.config = config;
-      this.Gui.core = this;
-      this.Gui.Init();
+      this.Gui.Init(this, this.camera, this.light, this.config);
       this.camera.RootObject = this.gameObject;
     }
 

@@ -13,10 +13,10 @@ namespace SanyoCamera.GUI
     private int width = 640;
     private int height = 330;
     private GuiTab tab = new GuiTab();
-    public CameraManager camera;
-    public LightManager light;
-    public ConfigManager config;
-    public Core core;
+    private CameraManager camera;
+    private LightManager light;
+    private ConfigManager config;
+    private Core core;
 
     private void OnEnable() {
       camera.Setting = true;
@@ -34,7 +34,12 @@ namespace SanyoCamera.GUI
       this.style.LoadStyles(Application.dataPath + "/../UserData/_scripts/SanyoCamera/.style/");
     }
 
-    public void Init(){
+    public void Init(Core core, CameraManager camera, LightManager light, ConfigManager config){
+      this.camera = camera;
+      this.light = light;
+      this.config = config;
+      this.core = core;
+      
       this.tab.Add(new CameraTab(style, camera));
       this.tab.Add(new LightTab(style, light));
       this.tab.Add(new ConfigTab(style, core));
