@@ -173,7 +173,7 @@ namespace SanyoCamera.GUI
               if(Input.GetKey(KeyCode.Mouse0)){
                 this.Position.Vector3 += move/15;
               }else if(Input.GetKey(KeyCode.Mouse1)){
-                this.Angle.Vector3 += new Vector3(move.z,move.x,move.y)/5;
+                this.Angle.Vector3 += new Vector3(-move.z,move.x,move.y)/5;
               }
             }
           }
