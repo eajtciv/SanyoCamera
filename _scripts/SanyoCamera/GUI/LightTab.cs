@@ -54,7 +54,7 @@ namespace SanyoCamera.GUI
             if(i.GetComponent<UnityEngine.Light>().enabled)
               return content;
             else
-              return "# " + content;
+              return string.Format("<color=#808080>{0}</color>", content);
           }), 1, this.style["select"]);
           if(this.Target != NowTarget){
             this.Target = NowTarget;
