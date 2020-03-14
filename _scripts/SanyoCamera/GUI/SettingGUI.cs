@@ -41,7 +41,7 @@ namespace SanyoCamera.GUI
       this.core = core;
       
       this.tab.Add(new CameraTab(style, camera));
-      this.tab.Add(new LightTab(style, light));
+      this.tab.Add(new LightTab(style, light, camera));
       this.tab.Add(new ConfigTab(style, core));
     }
     private void OnDestroy() {

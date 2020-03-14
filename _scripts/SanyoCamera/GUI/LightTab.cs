@@ -13,14 +13,16 @@ namespace SanyoCamera.GUI
 
     private GUIStyleManager style;
     private LightManager light;
+    private CameraManager camera;
     private int Target = -1;
     private UnityEngine.Light TargetLight;
     private Vector2 scrollPosition, AttachScrollPosition;
     private KeyInputer inputer = new KeyInputer();
 
-    public LightTab(GUIStyleManager style, LightManager light){
+    public LightTab(GUIStyleManager style, LightManager light, CameraManager camera){
       this.style = style;
       this.light = light;
+      this.camera = camera;
     }
 
     public void OnTabEnter(){}
@@ -233,13 +235,16 @@ namespace SanyoCamera.GUI
           AttachScrollPosition = GUILayout.BeginScrollView (AttachScrollPosition);
           GUILayout.BeginVertical();
           GameObject[] players = CameraManager.GetPlayers();
-          GameObject[] newPlayers = new GameObject[players.Length + 1];
-          Array.Copy(players, 0, newPlayers, 1, players.Length);
-          newPlayers[0] = CameraManager.GetMachine().gameObject;
+          GameObject[] newPlayers = new GameObject[players.Length + 2];
+          Array.Copy(players, 0, newPlayers, 2, players.Length);
+          newPlayers[0] = camera.CameraObject ?? UnityEngine.Camera.main.gameObject;
+          newPlayers[1] = CameraManager.GetMachine().gameObject;
 
           string[] MountbleTargets = new string[newPlayers.Length + 1];
-          MountbleTargets[0] = "-------------[ World ]-------------";
           Array.Copy(Array.ConvertAll(newPlayers, i => i.name), 0, MountbleTargets, 1, newPlayers.Length);
+          MountbleTargets[0] = "<color=#60ff60>[World]</color>";
+          MountbleTargets[1] = string.Format("<color=#60ff60>[Camera]</color> {0}", MountbleTargets[1]);
+          MountbleTargets[2] = string.Format("<color=#60ff60>[Machine]</color> {0}", MountbleTargets[2]);
           
           int attachTarget = Array.FindIndex(newPlayers, i => i.transform == (this.TargetLight != null ? this.TargetLight.transform.parent : this.light.DefaultAttach))+1;
           int nowAttachTarget = GUILayout.SelectionGrid(attachTarget, MountbleTargets, 1, this.style["select"]);
