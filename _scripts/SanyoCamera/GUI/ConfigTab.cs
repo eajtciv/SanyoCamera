@@ -11,6 +11,10 @@ namespace SanyoCamera.GUI
   {
     public string Name() => "Config";
 
+    public void OnTabEnter(){}
+    
+    public void OnTabExit(){}
+
     private Core core;
     private ConfigManager config;
     private GUIStyleManager style;

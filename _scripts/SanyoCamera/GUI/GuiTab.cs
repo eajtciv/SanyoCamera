@@ -9,10 +9,25 @@ namespace SanyoCamera.GUI
   public class GuiTab : List<IGuiTab>
   {
     public int Index { set; get; }
-    private int Offset = 0;
     public int Limit { set; get; } = 3;
+    public bool Enabled {
+      set{
+        if(this._Enabled = value)
+          this[this.Index].OnTabEnter();
+        else
+          this[this.Index].OnTabExit();
+      } get {
+        return _Enabled;
+      }
+    }
+    private int Offset = 0;
+    private int PreIndex;
+    private bool _Enabled;
 
     public void Mount(GUIStyleManager style){
+      if(_Enabled == false)
+        return;
+
       int size = Math.Min(this.Count, this.Limit);
       IGuiTab[] items = new IGuiTab[size];
       Array.Copy(this.ToArray(),this.Offset, items, 0, size);
@@ -35,6 +50,11 @@ namespace SanyoCamera.GUI
         GUILayout.Label(e.ToString());
       }
       GUILayout.EndVertical();
+      if(this.PreIndex != this.Index){
+        this[this.PreIndex].OnTabExit();
+        this[this.Index].OnTabEnter();
+        this.PreIndex = this.Index;
+      }
     }
   }
 }

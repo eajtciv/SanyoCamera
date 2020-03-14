@@ -23,6 +23,10 @@ namespace SanyoCamera.GUI
       this.light = light;
     }
 
+    public void OnTabEnter(){}
+    
+    public void OnTabExit(){}
+
     private SliderControll Range = new SliderControll("Range", 10, 640f, 1);
     private SliderControll SpotAngle = new SliderControll("SpotAngle", 0.1f, 180.1f, 1);
     private SliderControll Intensity = new SliderControll("Intensity", 0.1f, 32f);

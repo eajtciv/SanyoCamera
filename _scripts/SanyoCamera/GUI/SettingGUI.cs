@@ -19,10 +19,10 @@ namespace SanyoCamera.GUI
     private Core core;
 
     private void OnEnable() {
-      camera.Setting = true;
+      tab.Enabled = camera.Setting = true;
     }
     private void OnDisable() {
-      camera.Setting = false;
+      tab.Enabled = camera.Setting = false;
     }
 
     private void Awake() {

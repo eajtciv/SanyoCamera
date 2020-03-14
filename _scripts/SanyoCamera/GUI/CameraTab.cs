@@ -20,6 +20,10 @@ namespace SanyoCamera.GUI
 
     public string Name() => "Camera";
 
+    public void OnTabEnter(){}
+    
+    public void OnTabExit(){}
+
     private int Target = 0;
     private Vector2 scrollPosition;
 

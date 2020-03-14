@@ -8,5 +8,7 @@ namespace SanyoCamera.GUI
   {
     string Name();
     void Mount();
+    void OnTabEnter();
+    void OnTabExit();
   }
 }
