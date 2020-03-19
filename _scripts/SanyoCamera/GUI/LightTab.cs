@@ -25,9 +25,24 @@ namespace SanyoCamera.GUI
       this.camera = camera;
     }
 
-    public void OnTabEnter(){}
+    private GameObject lightPointObject;
+    private Mesh lightPointMesh;
+    private Material lightPointMaterial;
+
+    public void OnTabEnter(){
+      this.lightPointMesh = ObjFormatUtil.ToMesh(Application.dataPath + "/../UserData/_scripts/SanyoCamera/icosphere.obj");
+      this.lightPointMaterial = new Material(Shader.Find("Custom/Screen"));
+      this.lightPointObject = new GameObject("SanyoCamera-LightPointObject");
+      this.lightPointObject.AddComponent<MeshFilter>().sharedMesh = this.lightPointMesh;
+      this.lightPointObject.AddComponent<MeshRenderer>().material = this.lightPointMaterial;
+      this.lightPointObject.transform.localScale = Vector3.one / 5;
+    }
     
-    public void OnTabExit(){}
+    public void OnTabExit(){
+      MonoBehaviour.Destroy(this.lightPointMaterial);
+      MonoBehaviour.Destroy(this.lightPointMesh);
+      MonoBehaviour.Destroy(this.lightPointObject);
+    }
 
     private SliderControll Range = new SliderControll("Range", 10, 640f, 1);
     private SliderControll SpotAngle = new SliderControll("SpotAngle", 0.1f, 180.1f, 1);
@@ -185,7 +200,11 @@ namespace SanyoCamera.GUI
           }
         }
 
+        this.lightPointObject.SetActive(this.TargetLight != null);
+
         if(this.TargetLight != null){
+          this.lightPointObject.transform.position = this.TargetLight.transform.position;
+
           if(this.TargetLight.range != this.Range.Value){
             this.light.DefaultRange = this.TargetLight.range = this.Range.Value;
           }
