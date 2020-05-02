@@ -27,12 +27,7 @@ namespace SanyoCamera.Camera.Tracker
         if(Input.GetKey(manager.config.Key["CAMERA_HIGHMOVE_KEY"]))
           moveTarget *= 2;
         manager.CameraOffset += moveTarget / 4;
-      } 
-
-      if(!manager.Setting && Input.GetKey(KeyCode.Mouse0)){
-        Quaternion quaternion = manager.CameraTransform.rotation;
-        if(manager.TrackingTarget != null)
-          quaternion =  manager.TrackingTarget.rotation * Quaternion.Euler(manager.CameraAngle);
+      } else if(Input.GetKey(KeyCode.Mouse0)){
         Vector3 moveTarget = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
           moveTarget += Vector3.forward;
@@ -51,9 +46,7 @@ namespace SanyoCamera.Camera.Tracker
 
         manager.CameraOffset += Quaternion.Euler(manager.CameraAngle) * (moveTarget / 4);
 
-        Vector3 angleTarget = Vector3.zero;
-        angleTarget += new Vector3(0, Input.GetAxis("MouseX"), 0);
-        angleTarget += new Vector3(-Input.GetAxis("MouseY"), 0, 0);
+        Vector3 angleTarget = new Vector3(-Input.GetAxis("MouseY"), Input.GetAxis("MouseX"), 0);
         if(Input.GetKey(manager.config.Key["CAMERA_HIGHMOVE_KEY"]))
           angleTarget *= 2;
         manager.CameraAngle += angleTarget;
