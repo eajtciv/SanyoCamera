@@ -101,6 +101,8 @@ namespace SanyoCamera.GUI
       {
         if(this.Offset.Vector3 != this.camera.CameraOffset)
           this.Offset.Vector3 = this.camera.CameraOffset;
+        if(this.Angle.Vector3 != this.camera.CameraAngle)
+          this.Angle.Vector3 = this.camera.CameraAngle;
 
         this.Angle.Mount(this.style);
         GUILayout.Space(3);
