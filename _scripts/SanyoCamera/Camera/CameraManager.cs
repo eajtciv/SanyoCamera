@@ -41,6 +41,8 @@ namespace SanyoCamera.Camera
     public float StalkingDistance { set; get; } = 50;
     public float CameraMoveSpeed { set; get; } = 1;
     public float TrackingResponse { set; get; } = 1;
+    public float CameraNearClip { set; get; }
+    public float CameraForClip { set; get; }
 
     public bool Setting { set; get; }
 
@@ -69,6 +71,10 @@ namespace SanyoCamera.Camera
       this.MainCameraFOV = this.MainCamera.fieldOfView;
       if(this.CameraFoV == 0)
         this.CameraFoV = this.MainCameraFOV;
+      if(this.CameraNearClip == 0)
+        this.CameraNearClip = this.MainCamera.nearClipPlane;
+      if(this.CameraForClip == 0)
+        this.CameraForClip = this.MainCamera.farClipPlane;
       this.MainCamera.enabled = false;
       // free camera on
       this.MainCamera.GetComponent<RideCameraController>().ONGNOMCJBGE = true;
@@ -122,6 +128,8 @@ namespace SanyoCamera.Camera
         this.CameraFoV += -(Input.GetAxis("MouseW") * 10f);
         this.CameraFoV = Math.Max(0.01f, Math.Min(179f, this.CameraFoV));
         this.Camera.fieldOfView -= (this.Camera.fieldOfView - this.CameraFoV) / 10;
+        this.Camera.nearClipPlane = this.CameraNearClip;
+        this.Camera.farClipPlane = this.CameraForClip;
 
         this.MainCamera.transform.position = this.CameraTransform.position;
         this.MainCamera.transform.rotation = this.CameraTransform.rotation;

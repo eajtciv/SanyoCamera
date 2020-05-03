@@ -35,6 +35,8 @@ namespace SanyoCamera.GUI
     private SliderControll StalkingDistance = new SliderControll("Stalking Distance", 10f, 1000f);
     private SliderControll FieldOfView = new SliderControll("FieldOfView", 0.01f, 179f);
     private SliderControll TrackingResponse = new SliderControll("Tracking Response", 0f, 100f);
+    private SliderControll NearClipPlane = new SliderControll("NearClipPlane", 0.01F, 1000f,2);
+    private SliderControll FarClipPlane = new SliderControll("FarClipPlane", 10, 20000f,0);
     public void Mount(){
       GUILayout.BeginHorizontal();
       GUILayout.BeginVertical();
@@ -129,6 +131,10 @@ namespace SanyoCamera.GUI
           this.StalkingDistance.Value = this.camera.StalkingDistance;
         if(this.TrackingResponse.Value != this.camera.TrackingResponse)
           this.TrackingResponse.Value = this.camera.TrackingResponse;
+        if(this.NearClipPlane.Value != this.camera.CameraNearClip)
+          this.NearClipPlane.Value = this.camera.CameraNearClip;
+        if(this.FarClipPlane.Value != this.camera.CameraForClip)
+          this.FarClipPlane.Value = this.camera.CameraForClip;
 
         this.MoveSpeed.Mount(this.style);
         GUILayout.Space(3);
@@ -137,6 +143,10 @@ namespace SanyoCamera.GUI
         this.FieldOfView.Mount(this.style);
         GUILayout.Space(3);
         this.TrackingResponse.Mount(this.style);
+        GUILayout.Space(3);
+        this.NearClipPlane.Mount(this.style);
+        GUILayout.Space(3);
+        this.FarClipPlane.Mount(this.style);
 
         if(this.MoveSpeed.Value != this.camera.CameraMoveSpeed)
           this.camera.CameraMoveSpeed = this.MoveSpeed.Value;
@@ -146,8 +156,10 @@ namespace SanyoCamera.GUI
           this.camera.StalkingDistance= this.StalkingDistance.Value;
         if(this.TrackingResponse.Value != this.camera.TrackingResponse)
           this.camera.TrackingResponse= this.TrackingResponse.Value;
-
-          
+        if(this.NearClipPlane.Value != this.camera.CameraNearClip)
+          this.camera.CameraNearClip= this.NearClipPlane.Value;
+        if(this.FarClipPlane.Value != this.camera.CameraForClip)
+          this.camera.CameraForClip= this.FarClipPlane.Value;
       }
       GUILayout.EndVertical();
       
