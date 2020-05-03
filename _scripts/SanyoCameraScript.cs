@@ -10,7 +10,7 @@ using SanyoCamera;
  */
 public class SanyoCameraScript : UserScript
 {
-  private const string Version = "1.1.2-0 beta";
+  private const string Version = "1.1.3-0 beta";
 
   private GameObject ScriptObject;
 
