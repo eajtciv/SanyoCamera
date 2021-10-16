@@ -5,6 +5,7 @@ using SanyoCamera;
 using SanyoCamera.Camera;
 using SanyoCamera.Light;
 using SanyoCamera.GUI;
+using SanyoCamera.Extension;
 
 namespace SanyoCamera
 {
@@ -31,6 +32,10 @@ namespace SanyoCamera
       this.Gui = this.gameObject.AddComponent<SettingGUI>();
       this.Gui.Init(this, this.Camera, this.Light, this.Config);
       this.Camera.RootObject = this.gameObject;
+
+      foreach(IExtension instnace in new Extensions()){
+        instnace.Init(this);
+      }
     }
 
     public void Update(){
