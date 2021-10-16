@@ -12,9 +12,9 @@ namespace SanyoCamera
   {
     public string Version;
 
-    public ConfigManager config { private set; get; }
-    public LightManager light { private set; get; }
-    public CameraManager camera { private set; get; }
+    public ConfigManager Config { private set; get; }
+    public LightManager Light { private set; get; }
+    public CameraManager Camera { private set; get; }
 
     public SettingGUI Gui { private set; get; }
 
@@ -23,58 +23,58 @@ namespace SanyoCamera
         UnityEngine.Object.DestroyImmediate(this);
         return;
       }
-      this.config = new ConfigManager();
-      this.config.ConfigSaveDefault();
-      this.config.ConfigLoad();
-      this.camera = new CameraManager(config);
-      this.light = new LightManager();
+      this.Config = new ConfigManager();
+      this.Config.ConfigSaveDefault();
+      this.Config.ConfigLoad();
+      this.Camera = new CameraManager(Config);
+      this.Light = new LightManager();
       this.Gui = this.gameObject.AddComponent<SettingGUI>();
-      this.Gui.Init(this, this.camera, this.light, this.config);
-      this.camera.RootObject = this.gameObject;
+      this.Gui.Init(this, this.Camera, this.Light, this.Config);
+      this.Camera.RootObject = this.gameObject;
     }
 
     public void Update(){
       if ((EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null))
         return;
 
-      if (Input.GetKeyDown(config.Key["CAMERA_MENU_KEY"])){
+      if (Input.GetKeyDown(Config.Key["CAMERA_MENU_KEY"])){
         if(CameraManager.GetMachine() == null)
           return;
         // Cursor [None / Locked] switch
         new AutoPilot().FreeCursor(this.Gui.enabled = !this.Gui.enabled);
       }
 
-      this.camera.Update();
+      this.Camera.Update();
 
       if(this.Gui.enabled)
         return;
 
-      this.light.ListenSwitch();
+      this.Light.ListenSwitch();
 
-      if (Input.GetKeyDown(config.Key["CAMERA_SWITCH_KEY"])){
-        if(this.camera.Enabled() == false){
-          this.camera.CreateCamera();
+      if (Input.GetKeyDown(Config.Key["CAMERA_SWITCH_KEY"])){
+        if(this.Camera.Enabled() == false){
+          this.Camera.CreateCamera();
         } else {
-          this.camera.DestroyCamera();
+          this.Camera.DestroyCamera();
         }
       }
 
-      if (Input.GetKeyDown(config.Key["CAMERA_SMOOTH_KEY"])){
-        this.camera.SmoothMove = !this.camera.SmoothMove;
+      if (Input.GetKeyDown(Config.Key["CAMERA_SMOOTH_KEY"])){
+        this.Camera.SmoothMove = !this.Camera.SmoothMove;
       }
 
-      if (Input.GetKeyDown(config.Key["LIGHT_ADD_KEY"])){
-        this.light.Create(CameraManager.GetMachine());
+      if (Input.GetKeyDown(Config.Key["Light_ADD_KEY"])){
+        this.Light.Create(CameraManager.GetMachine());
       }
 
-      if (Input.GetKeyDown(config.Key["HD_SCREENSHOT_KEY"])){
-        if (!SanyoLib.DirUtil.Exists(config.ScreenshotPath))
-          SanyoLib.DirUtil.Create(config.ScreenshotPath);
-        string filePath = string.Format("{0}/{1}.png", config.ScreenshotPath, DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
-        if(config.ScreenshotRenderMode){
-          ScreenCaptureUtil.Capture(filePath, config.ScreenshotWidth, config.ScreenshotHeight, camera.Camera, true);
+      if (Input.GetKeyDown(Config.Key["HD_SCREENSHOT_KEY"])){
+        if (!SanyoLib.DirUtil.Exists(Config.ScreenshotPath))
+          SanyoLib.DirUtil.Create(Config.ScreenshotPath);
+        string filePath = string.Format("{0}/{1}.png", Config.ScreenshotPath, DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+        if(Config.ScreenshotRenderMode){
+          ScreenCaptureUtil.Capture(filePath, Config.ScreenshotWidth, Config.ScreenshotHeight, this.Camera.Camera, true);
         }else{
-          Application.CaptureScreenshot(filePath, config.ScreenshotResolution);
+          Application.CaptureScreenshot(filePath, Config.ScreenshotResolution);
         }
       }
     }
@@ -82,8 +82,8 @@ namespace SanyoCamera
     public void OnDestroy()
     {
       new AutoPilot().FreeCursor(false);
-      this.camera.DestroyCamera();
-      this.light.DestroyLights();
+      this.Camera.DestroyCamera();
+      this.Light.DestroyLights();
     }
   }
 }

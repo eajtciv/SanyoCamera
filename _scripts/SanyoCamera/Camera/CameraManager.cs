@@ -15,10 +15,10 @@ namespace SanyoCamera.Camera
 
     public CameraManager(ConfigManager config){
       this.config = config;
-      this.trackers.Add(new LockTracker());
-      this.trackers.Add(new FixedTracker());
-      this.trackers.Add(new StalkingTracker());
-      this.trackers.Add(new FreeTracker());
+      this.Trackers.Add(new LockTracker());
+      this.Trackers.Add(new FixedTracker());
+      this.Trackers.Add(new StalkingTracker());
+      this.Trackers.Add(new FreeTracker());
     }
 
     public GameObject RootObject { set; get; }
@@ -30,7 +30,7 @@ namespace SanyoCamera.Camera
     private float MainCameraFOV;
 
     public int TrackingType { set; get; }
-    public List<ITracker> trackers = new List<ITracker>();
+    public List<ITracker> Trackers = new List<ITracker>();
 
     public Transform TrackingTarget { set; get; }
     public Vector3 CameraOffset { set; get; }
@@ -136,7 +136,7 @@ namespace SanyoCamera.Camera
       }
 
       if(this.CameraTransform != null){
-        this.trackers[TrackingType].Update(this);
+        this.Trackers[TrackingType].Update(this);
       }
     }
 

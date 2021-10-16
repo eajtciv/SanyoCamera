@@ -65,7 +65,7 @@ namespace SanyoCamera.GUI
         GUILayout.BeginVertical(this.style["fill"], GUILayout.MinHeight(0), GUILayout.MinWidth(0));
         GUILayout.Label("Tracking Type", this.style["label"]);
         GUILayout.BeginHorizontal(this.style["frame-margin"]);
-        camera.TrackingType = GUILayout.SelectionGrid(camera.TrackingType, Array.ConvertAll(camera.trackers.ToArray(), i => i.Name()), camera.trackers.Count, this.style["select"]);
+        camera.TrackingType = GUILayout.SelectionGrid(camera.TrackingType, Array.ConvertAll(camera.Trackers.ToArray(), i => i.Name()), camera.Trackers.Count, this.style["select"]);
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
 

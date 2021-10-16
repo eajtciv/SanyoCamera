@@ -25,7 +25,7 @@ namespace SanyoCamera.GUI
     public ConfigTab(GUIStyleManager style, Core core){
       this.style = style;
       this.core = core;
-      this.config = core.config;
+      this.config = core.Config;
 
       this.KeyItemNames.Add("CAMERA_MENU_KEY", "Camera Menu");
       this.KeyItemNames.Add("CAMERA_SWITCH_KEY", "Camera Switch");
