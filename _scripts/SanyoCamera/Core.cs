@@ -43,7 +43,7 @@ namespace SanyoCamera
         return;
 
       if (Input.GetKeyDown(Config.Key["CAMERA_MENU_KEY"])){
-        if(CameraManager.GetMachine() == null)
+        if(!(CameraManager.GetMachine() != null || Array.Exists(Array.Find(UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects(), i => (i.name == "SceneManager")).GetComponents<Component>(), i => i.ToString().Contains("Host"))))
           return;
         // Cursor [None / Locked] switch
         new AutoPilot().FreeCursor(this.Gui.enabled = !this.Gui.enabled);

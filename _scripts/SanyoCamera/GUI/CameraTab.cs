@@ -44,9 +44,13 @@ namespace SanyoCamera.GUI
         // Player Selector
         scrollPosition = GUILayout.BeginScrollView (scrollPosition);
         GameObject[] players = CameraManager.GetPlayers();
-        GameObject[] newPlayers = new GameObject[players.Length + 1];
-        Array.Copy(players, 0, newPlayers, 1, players.Length);
-        newPlayers[0] = CameraManager.GetMachine().gameObject;
+        GameObject[] newPlayers = players;
+        Transform machine = CameraManager.GetMachine();
+        if(machine != null){
+          newPlayers = new GameObject[players.Length + 1];
+          Array.Copy(players, 0, newPlayers, 1, players.Length);
+          newPlayers[0] = machine.gameObject;
+        }
 
         this.Target = Array.FindIndex(newPlayers, i => i.transform == camera.TrackingTarget);
         int NowTarget = GUILayout.SelectionGrid(this.Target, Array.ConvertAll(newPlayers, i => i.name.Equals("Machine_P(Clone)") ? "Machine Loading..." : i.name), 1, this.style["select"]);
