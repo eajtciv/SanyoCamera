@@ -68,7 +68,7 @@ namespace SanyoCamera
         this.Camera.SmoothMove = !this.Camera.SmoothMove;
       }
 
-      if (Input.GetKeyDown(Config.Key["Light_ADD_KEY"])){
+      if (Input.GetKeyDown(Config.Key["LIGHT_ADD_KEY"])){
         this.Light.Create(CameraManager.GetMachine());
       }
 
